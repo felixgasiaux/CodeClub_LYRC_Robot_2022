@@ -8,4 +8,4 @@ Team members are:
 - Félix Gasiaux 
 
 The entire robot is built in [Level 2](level2.lu) in Bonnevoie.
-
+This Team is formed from members of the CodeClub association in Luxembourg. 
