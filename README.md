@@ -7,5 +7,5 @@ Team members are:
 - Avanti Sharma 
 - Félix Gasiaux 
 
-The entire robot is built in [Level 2](level2.lu) in Bonnevoie.
-This Team is formed from members of the [CodeClub](codeclub.lu) association in Luxembourg. 
+The entire robot is built in [Level 2](https://level2.lu) in Bonnevoie.
+This Team is formed from members of the [CodeClub](https://codeclub.lu) association in Luxembourg. 
