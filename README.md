@@ -9,3 +9,5 @@ Team members are:
 
 The entire robot is built in [Level 2](https://level2.lu) in Bonnevoie.
 This Team is formed from members of the [CodeClub](https://codeclub.lu) association in Luxembourg and mentored by Thierry Goniva, Jean-Phillipe Guisset and Miguel (I do not know the name sorry).
+
+You have to add the Camera ilbrary to where you install the normal libraries. This library allows you to use the camera with the mbot. 
