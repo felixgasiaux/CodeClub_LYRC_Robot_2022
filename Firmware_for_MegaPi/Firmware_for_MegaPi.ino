@@ -38,7 +38,7 @@
 /**************************************************************************/
 // Added Libarys
 
-#include <MeCamera.h>
+// #include <MeCamera.h>
 
 /**************************************************************************/
 
@@ -69,7 +69,7 @@ MeLineFollower line(PORT_8);
 MeColorSensor *colorsensor  = NULL;
 
 /***************************************************************************/
-
+/*
 //Defining Camera
 
 MeCamera MeCamera_6(6);
@@ -78,7 +78,7 @@ MeCamera MeCamera_6(6);
 
 double angle_rad = PI/180.0;
 double angle_deg = 180.0/PI;
-
+*/
 /***************************************************************************/
 
 
@@ -2800,19 +2800,19 @@ boolean read_serial(void)
 
 /**************************************************************************/
 // _loop Function
-
+/*
 void _loop() {
  encoders[0].loop();
  encoders[1].loop();
 }
 
-
+*/
 /**************************************************************************/
 
 
 /**************************************************************************/
 //_delay function
-
+/*
 void _delay(float seconds){
  if(seconds < 0.0){
  seconds = 0.0;
@@ -2820,7 +2820,7 @@ void _delay(float seconds){
  long endTime = millis() + seconds * 1000;
  while(millis() < endTime) _loop();
 }
-
+*/
 /**************************************************************************/
 
 void setup()
@@ -2883,7 +2883,7 @@ void setup()
 /**************************************************************************/
 
 //Custom code added to setup function
-
+/*
  MeCamera_6.begin();
  attachInterrupt(encoders[0].getIntNum(), isr_process_encoder1, RISING);
  attachInterrupt(encoders[1].getIntNum(), isr_process_encoder2, RISING);
@@ -2892,6 +2892,8 @@ void setup()
  TCCR2A = _BV(WGM21) | _BV(WGM20);
  TCCR2B = _BV(CS21);
 
+*/
+setup_gas();
 
 /**************************************************************************/
   
@@ -3020,7 +3022,7 @@ void loop()
   /**************************************************************************/
 
 //Custom Code in loop function
-
+/*
  MeCamera_6.setCameraMode(CCC_MODE);
  if(MeCamera_6.getCCCValue(1, 0)){
  encoders[0].setTarPWM(100/100.0*255);
@@ -3029,7 +3031,8 @@ void loop()
  encoders[1].setTarPWM(100/100.0*255);
  Serial.println("No specified color found!");
  }
-
+*/
+loop_gas();
 /**************************************************************************/
 
 }
