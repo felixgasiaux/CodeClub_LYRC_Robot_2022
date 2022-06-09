@@ -16,5 +16,6 @@ The kit consists of the following components:
 -Makeblock color sensor
 -up to 150g of passive enhancement(s)
 
-We add the camera on port 6 for now and copy the library from the hidden apllication folder from the [Makeblock App](https://www.makeblock.com/software/)  for PC/Mac.
+You have to install the firmware for the Makeblock Robot from their [repository](https://github.com/Makeblock-official/Makeblock-Libraries). This is also where you can find the Firmwae for the different rovers. Just import it trough the normal Arduino IDE and it should work. 
+We add the camera on port 6 for now and copy the library from the hidden apllication folder from the [Makeblock App](https://www.makeblock.com/software/)  for PC/Mac to the folder where the Arduino libraries are stored(Documents/Arduino/libraries).
 You have to add the Camera library to where you install the normal libraries. This library allows you to use the camera with the mbot. 
