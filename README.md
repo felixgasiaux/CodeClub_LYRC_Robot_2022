@@ -11,10 +11,10 @@ The entire robot is built in [Level 2](https://level2.lu) in Bonnevoie.
 This Team is formed from members of the [CodeClub](https://codeclub.lu) association in Luxembourg and mentored by Thierry Goniva, Jean-Phillipe Guisset and Miguel (I do not know the name sorry).
 
 The kit consists of the following components:
-*Makeblock Ultimate 2.0 kit
-*Makeblock smartcam (Pixie)
-*Makeblock color sensor
-*up to 150g of passive enhancement(s)
+* Makeblock Ultimate 2.0 kit
+* Makeblock smartcam (Pixie)
+* Makeblock color sensor
+* up to 150g of passive enhancement(s)
 
 You have to install the firmware for the Makeblock Robot from their [repository](https://github.com/Makeblock-official/Makeblock-Libraries) . This is also where you can find the Firmwae for the different rovers. Just import it trough the normal Arduino IDE and it should work. 
 We add the camera on port 6 for now and copy the library from the hidden apllication folder from the [Makeblock App](https://www.makeblock.com/software/)  for PC/Mac to the folder where the Arduino libraries are stored(Documents/Arduino/libraries).
