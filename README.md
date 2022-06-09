@@ -16,5 +16,5 @@ The kit consists of the following components:
 -Makeblock color sensor
 -up to 150g of passive enhancement(s)
 
-We add the camera on port 6 for now and copy the library from the hidden apllication folder from the[Makeblock App](https://www.makeblock.com/software/) for PC/Mac.
+We add the camera on port 6 for now and copy the library from the hidden apllication folder from the [Makeblock App](https://www.makeblock.com/software/)  for PC/Mac.
 You have to add the Camera library to where you install the normal libraries. This library allows you to use the camera with the mbot. 
