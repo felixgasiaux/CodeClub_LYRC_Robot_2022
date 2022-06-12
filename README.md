@@ -1,6 +1,14 @@
 # CodeClub_LYRC_Robot_2022
 This is the repo for documenting our robot build of the 2022 LYRC. 
 
+## Index
+
+  1. [Our Team](https://github.com/felixgasiaux/CodeClub_LYRC_Robot_2022#about-the-team)
+  2. [The hardware used](https://github.com/felixgasiaux/CodeClub_LYRC_Robot_2022#hardware)
+  3. [Installation](https://github.com/felixgasiaux/CodeClub_LYRC_Robot_2022.git#installation)
+
+---
+
 ## About the Team
 * Noé Guerien
 * [Kim Bourg](https://github.com/B0urg)
@@ -9,14 +17,6 @@ This is the repo for documenting our robot build of the 2022 LYRC.
 
 The entire robot is built in [Level 2](https://level2.lu) in Bonnevoie.
 This Team is formed from members of the [CodeClub](https://codeclub.lu) association in Luxembourg and mentored by Thierry Goniva, Jean-Phillipe Guisset and Miguel (I do not know the name sorry).
-
----
-
-## Index
-
-  1. [Our Team](https://github.com/felixgasiaux/CodeClub_LYRC_Robot_2022#about-the-team)
-  2. [The hardware used](https://github.com/felixgasiaux/CodeClub_LYRC_Robot_2022#hardware)
-  3. [Installation](https://github.com/felixgasiaux/CodeClub_LYRC_Robot_2022.git#installation)
 
 ---
 
