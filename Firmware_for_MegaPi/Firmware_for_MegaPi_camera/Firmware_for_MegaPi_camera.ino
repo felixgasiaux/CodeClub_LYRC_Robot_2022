@@ -36,7 +36,9 @@
 #include <Wire.h>
 #include <SoftwareSerial.h>
 /*************************************Added Libarys*************************************/
-//#include <MeCamera.h>
+
+#include <MeCamera.h>
+int16_t CameraData;
 
 MeCamera MeCamera_6(6);
 double angle_rad = PI/180.0;
@@ -1929,15 +1931,20 @@ void readSensor(uint8_t device)
       break;
     case GASSENSOR:
       {
+
+        /*
         if(GasSensor.getPort() != port)
         {
-          GasSensor.reset(port);
+          GasSensor.reset(6);
           GasSensor.setpin(GasSensor.pin2(),GasSensor.pin1());
         }
         int16_t GasData; 
-        GasData = GasSensor.readAnalog();
-        //GasData =   bool blue_boolean;
+        //int16_t CameraData;
+        //GasData = GasSensor.readAnalog();
+        GasData = CameraData;
         sendShort(GasData);
+        Serial.print("Gassensor works ");
+       */
       }
       break;
     case GYRO:
@@ -2810,15 +2817,9 @@ encoders[1].loop();
 
 void setup()
 {
-  MeCamera_6.begin();
-  
+  MeCamera_6.begin(); 
+  MeCamera_6.setLED(1);
   MeCamera_6.setCameraMode(CCC_MODE);
-  
-  bool blue_boolean;
-  blue_boolean = false;
-  bool yellow_boolean;
-  yellow_boolean = false;
-
 
 
 /*******************************************/
@@ -2894,23 +2895,36 @@ void setup()
  */
 void loop()
 {
- // MeCamera_6.setCameraMode(CCC_MODE); 
-      
-    if(MeCamera_6.getCCCValue(2, 0))
-    {
-  Serial.println("Blue");    
-  bool blue_boolean = true;
-  Serial.print(blue_boolean);
-  }
-  else if(MeCamera_6.getCCCValue(1, 0))
+  int16_t GasData; 
+  //int16_t CameraData;
+  //GasData = GasSensor.readAnalog();
+  GasData = CameraData;
+  sendShort(GasData);
+  //Serial.print("Gassensor works ");
+         
+  MeCamera_6.setCameraMode(CCC_MODE); 
+
+  if(MeCamera_6.getCCCValue(1, 0))
   {
-  Serial.println("Yellow");
-  bool yellow_boolean = true;
-  Serial.print(yellow_boolean);
+  Serial.println(GasData);
+  CameraData = 1;
+  }
+      
+  else if(MeCamera_6.getCCCValue(2, 0))
+  {
+  Serial.println(GasData);    
+  CameraData = 2 ;
+  }
+  
+  if(MeCamera_6.getCCCValue(3, 0))
+  {
+  Serial.println(GasData);    
+  CameraData = 3 ;
   }
   else
   {
   Serial.println("Nothing");
+  CameraData = 0;
   }
 
 
