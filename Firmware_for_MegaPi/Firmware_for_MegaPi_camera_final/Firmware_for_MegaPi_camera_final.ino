@@ -76,15 +76,6 @@ MeColorSensor *colorsensor  = NULL;
 
 /************************/
 
-
-void _delay(float seconds){
-if(seconds < 0.0){
-seconds = 0.0;
-}
-long endTime = millis() + seconds * 1000;
-while(millis() < endTime) _loop();
-}
-
 typedef struct MeModule
 {
   int16_t device;
@@ -601,7 +592,7 @@ void readEEPROM(void)
 void Forward(void)
 {
   encoders[0].setMotorPwm(moveSpeed);
-  encoders[1].setMotorPwm(moveSpeed);
+  encoders[1].setMotorPwm(-moveSpeed);
 }
 
 /**
@@ -621,7 +612,7 @@ void Forward(void)
 void Backward(void)
 {
   encoders[0].setMotorPwm(-moveSpeed);
-  encoders[1].setMotorPwm(-moveSpeed);
+  encoders[1].setMotorPwm(moveSpeed);
 }
 
 /**
@@ -640,8 +631,8 @@ void Backward(void)
  */
 void BackwardAndTurnLeft(void)
 {
-  encoders[0].setMotorPwm(-moveSpeed/4);
-  encoders[1].setMotorPwm(moveSpeed);
+  encoders[0].setMotorPwm(moveSpeed);
+  encoders[1].setMotorPwm(-moveSpeed/4);
 }
 
 /**
@@ -660,8 +651,8 @@ void BackwardAndTurnLeft(void)
  */
 void BackwardAndTurnRight(void)
 {
-  encoders[0].setMotorPwm(-moveSpeed);
-  encoders[1].setMotorPwm(moveSpeed/4);
+  encoders[0].setMotorPwm(-moveSpeed/4);
+  encoders[1].setMotorPwm(-moveSpeed);
 }
 
 /**
@@ -720,8 +711,8 @@ void TurnRight(void)
  */
 void TurnLeft1(void)
 {
-  encoders[0].setMotorPwm(moveSpeed);
-  encoders[1].setMotorPwm(moveSpeed);
+  encoders[0].setMotorPwm(-moveSpeed);
+  encoders[1].setMotorPwm(-moveSpeed);
 }
 
 /**
@@ -740,8 +731,8 @@ void TurnLeft1(void)
  */
 void TurnRight1(void)
 {
-  encoders[0].setMotorPwm(-moveSpeed);
-  encoders[1].setMotorPwm(-moveSpeed);
+  encoders[0].setMotorPwm(moveSpeed);
+  encoders[1].setMotorPwm(moveSpeed);
 }
 
 /**
@@ -2821,7 +2812,8 @@ void setup()
   MeCamera_6.begin(); 
   MeCamera_6.setLED(1);
   MeCamera_6.setCameraMode(CCC_MODE);
-
+  led.setColor(0,  255,266,255);
+  led.show();
 
 /*******************************************/
   Serial.begin(115200);
@@ -2893,50 +2885,49 @@ void setup()
  *    None
  * \par Others
  *    None
- */
-void loop()
+*/ 
+void serialprinttest()
 {
-  /*
-  int16_t GasData; 
-  //int16_t CameraData;
-  //GasData = GasSensor.readAnalog();
-  GasData = CameraData;
-  sendShort(GasData);
-  //Serial.print("Gassensor works ");
-  */      
-  //MeCamera_6.setCameraMode(CCC_MODE); 
+  Serial.println("working hard");
+}
 
+
+void ReadCameracolorandsetrgb()
+{      
+  //MeCamera_6.setCameraMode(CCC_MODE);
+  
   if(MeCamera_6.getCCCValue(1, 0))
   {
-  CameraData = 1;
-  Serial.println("Blue");
-  led.setColor(0,  0,255,255);
+  Serial.println("Yellow");
+  led.setColor(0,  255,255,0);
   led.show();
   }
       
   else if(MeCamera_6.getCCCValue(2, 0))
   {
-  Serial.println("Yellow");
-  led.setColor(0, 255,255,0);
+  Serial.println("Blue");    
+  led.setColor(0,  0,0,255);
   led.show();
   }
   
   if(MeCamera_6.getCCCValue(3, 0))
   {
-  Serial.print("Orange"); 
-  led.setColor(0,  255,0,0);
+  Serial.println("Other color");    
+  led.setColor(0,  0,255,0);
   led.show();
   }
   else
   {
-  //Serial.println("Nothing");
-  led.setColor(0,  255,255,255);
+  Serial.println("Nothing");
+  led.setColor(0,  0,0,0);
   led.show();
   }
-
-
-
-
+}
+ 
+void loop()
+{
+  serialprinttest();
+  ReadCameracolorandsetrgb();
 /********************************/
   currentTime = millis()/1000.0-lastTime;
   keyPressed = buttonSensor.pressed();
