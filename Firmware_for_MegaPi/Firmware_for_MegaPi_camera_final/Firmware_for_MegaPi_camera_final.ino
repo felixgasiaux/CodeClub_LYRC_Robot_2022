@@ -41,9 +41,15 @@
 int16_t CameraData;
 
 MeCamera MeCamera_6(6);
-double angle_rad = PI/180.0;
-double angle_deg = 180.0/PI;
 
+MeColorSensor colorsensor_7(7);
+
+uint8_t detectedColor(MeColorSensor colorSensor, uint8_t colorType){
+  if(colorType == colorSensor.Returnresult()){
+    return 1;
+  }
+  return 0;
+}
 
 /*************************************Added Libarys*************************************/
 
@@ -2812,8 +2818,11 @@ void setup()
   MeCamera_6.begin(); 
   MeCamera_6.setLED(1);
   MeCamera_6.setCameraMode(CCC_MODE);
-  led.setColor(0,  255,266,255);
+  led.setColor(0,  255,255,255);
   led.show();
+
+
+  colorsensor_7.SensorInit();
 
 /*******************************************/
   Serial.begin(115200);
@@ -2892,10 +2901,9 @@ void serialprinttest()
 }
 
 
-void ReadCameracolorandsetrgb()
+void ReadCameracolorandsetrgb() // Ball color detection trough Camera
 {      
-  //MeCamera_6.setCameraMode(CCC_MODE);
-  
+  //MeCamera_6.setCameraMode(CCC_MODE); Blacked out because it caused lag between the remote and the robot  
   if(MeCamera_6.getCCCValue(1, 0))
   {
   Serial.println("Yellow");
@@ -2923,11 +2931,37 @@ void ReadCameracolorandsetrgb()
   led.show();
   }
 }
+void Colorsensorread() // Homebase detection trought the color sensor
+{
+  if(detectedColor(colorsensor_7, 7)) //Blue homebase
+  {
+    Serial.println("Blue detected xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ");
+    led.setColor(0,  60,60,255);
+    led.show();
+  }
+  
+  if(detectedColor(colorsensor_7, 2)) //Red homebase
+  {
+    Serial.println("Red detected yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy ");
+    led.setColor(0,  255,0,0);
+    led.show();
+  }
+   
+  else
+  {   
+    Serial.println("nothing ");
+    led.setColor(0,  0,0,0);
+    led.show();
+    }
+  }
  
 void loop()
 {
+  
   serialprinttest();
   ReadCameracolorandsetrgb();
+  Colorsensorread();
+  
 /********************************/
   currentTime = millis()/1000.0-lastTime;
   keyPressed = buttonSensor.pressed();
