@@ -27,7 +27,6 @@ The kit consists of the following components:
 * [Makeblock color sensor](https://www.makeblock.com/project/me-color-sensor-v1)
 * up to 150g of passive enhancement(s)
 * [Makeblock MeRGB LED](https://www.makeblock.com/project/me-rgb-led)
-* 
 ---
 
 ## Installation
