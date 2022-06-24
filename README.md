@@ -26,7 +26,8 @@ The kit consists of the following components:
 * [Makeblock smartcam (Pixie)](https://education.makeblock.com/smart-camera/)
 * [Makeblock color sensor](https://www.makeblock.com/project/me-color-sensor-v1)
 * up to 150g of passive enhancement(s)
-
+* [Makeblock MeRGB LED](https://www.makeblock.com/project/me-rgb-led)
+* 
 ---
 
 ## Installation
@@ -35,7 +36,7 @@ To use our Code you first need to clone our Repository :
 ```bash
 git clone https://github.com/felixgasiaux/CodeClub_LYRC_Robot_2022.git
 ```
-Then you will need to include the libraries into your arduino Ide :
+Then you will need to include the libraries into your arduino IDE :
  > Under Sketch > Include Library > Add .ZIP Library 
 
  > Then select the Library you just downloaded with in the repository
@@ -46,4 +47,6 @@ Next you need to make sure that you have selected the right Board & Port :
 
  > Go to Tools > Port and select your Port
 
+ > Connect the Sensors to the correct Ports on the MegaPie
+ 
 Now open the .ino File from our Firmware, upload the code and have fun!
