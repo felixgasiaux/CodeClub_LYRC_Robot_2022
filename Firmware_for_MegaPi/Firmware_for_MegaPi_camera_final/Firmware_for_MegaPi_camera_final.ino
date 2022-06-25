@@ -58,24 +58,16 @@ uint8_t detectedColor(MeColorSensor colorSensor, uint8_t colorType){
 
 Servo servos[12];  
 MeMegaPiDCMotor dc;
-MeTemperature ts;
 //MeRGBLed led;
 MeRGBLed led(8, 4);
+MeCompass Compass;
 MeUltrasonicSensor *us = NULL;     //PORT_7
-Me7SegmentDisplay seg;
 MePort generalDevice;
 MeLEDMatrix ledMx;
+Me4Button buttonSensor;
 MeInfraredReceiver *ir = NULL;     //PORT_6
 MeGyro gyro_ext(0,0x68);           //external gryo sensor
-MeCompass Compass;
-MeJoystick joystick;
 MeStepperOnBoard steppers[4] = {MeStepperOnBoard(1),MeStepperOnBoard(2),MeStepperOnBoard(3),MeStepperOnBoard(4)};
-MeBuzzer buzzer;
-MeHumiture humiture;
-MeFlameSensor FlameSensor;
-MeGasSensor GasSensor;
-MeTouchSensor touchSensor;
-Me4Button buttonSensor;
 MeEncoderOnBoard encoders[4];
 MeLineFollower line(PORT_8);
 MeColorSensor *colorsensor  = NULL;
@@ -1401,6 +1393,37 @@ void runModule(uint8_t device)
         encoders[1].setTarPWM(-rightSpeed);
       }
       break;
+          case COMPASS:
+      {
+        if(Compass.getPort() != port)
+        {
+          Compass.reset(port);
+          Compass.setpin(Compass.pin1(),Compass.pin2());
+        }
+        double CompassAngle;
+        CompassAngle = Compass.getAngle();
+        sendFloat((float)CompassAngle);
+      }
+      break;
+          case BUTTON:
+      {
+
+        uint8_t key_num = readBuffer(7);
+        if(buttonSensor.getPort() != port)
+        {
+          buttonSensor.reset(port);
+        }
+
+        if(key_num == 0)
+        {
+          sendByte(keyPressed);
+        }
+        else
+        {
+          sendByte(keyPressed == readBuffer(7));
+        }
+      }
+      break;
     case STEPPER_NEW:
       {
         uint8_t subcmd = port;
@@ -1514,16 +1537,6 @@ void runModule(uint8_t device)
           }
           sv.write(v);
         }
-      }
-      break;
-    case SEVSEG:
-      {
-        if(seg.getPort() != port)
-        {
-          seg.reset(port);
-        }
-        float v = readFloat(7);
-        seg.display(v);
       }
       break;
     case LEDMATRIX:
@@ -1775,17 +1788,6 @@ void readSensor(uint8_t device)
         sendFloat(value);
       }
       break;
-    case TEMPERATURE_SENSOR:
-      {
-        slot = readBuffer(7);
-        if(ts.getPort() != port || ts.getSlot() != slot)
-        {
-          ts.reset(port,slot);
-        }
-        value = ts.temperature();
-        sendFloat(value);
-      }
-      break;
     case LIGHT_SENSOR:
     case SOUND_SENSOR:
     case POTENTIONMETER:
@@ -1797,25 +1799,6 @@ void readSensor(uint8_t device)
         }
         value = generalDevice.aRead2();
         sendFloat(value);
-      }
-      break;
-    case JOYSTICK:
-      {
-        slot = readBuffer(7);
-        if(joystick.getPort() != port)
-        {
-          joystick.reset(port);
-        }
-        if(slot==0)
-        {
-          sendShort(joystick.read(1));
-          sendShort(joystick.read(2));
-        }
-        else
-        {
-          value = joystick.read(slot);
-          sendFloat(value);
-        }
       }
       break;
     case INFRARED:
@@ -1885,66 +1868,7 @@ void readSensor(uint8_t device)
         sendFloat(value);  
       }
       break;
-    case COMPASS:
-      {
-        if(Compass.getPort() != port)
-        {
-          Compass.reset(port);
-          Compass.setpin(Compass.pin1(),Compass.pin2());
-        }
-        double CompassAngle;
-        CompassAngle = Compass.getAngle();
-        sendFloat((float)CompassAngle);
-      }
-      break;
-    case HUMITURE:
-      {
-        uint8_t index = readBuffer(7);
-        if(humiture.getPort() != port)
-        {
-          humiture.reset(port);
-        }
-        uint8_t HumitureData;
-        humiture.update();
-        if(index==2){
-          sendByte(humiture.getValue(0));
-          sendByte(humiture.getValue(1));
-        }else{
-          HumitureData = humiture.getValue(index);
-          sendByte(HumitureData);
-        }
-      }
-      break;
-    case FLAMESENSOR:
-      {
-        if(FlameSensor.getPort() != port)
-        {
-          FlameSensor.reset(port);
-          FlameSensor.setpin(FlameSensor.pin2(),FlameSensor.pin1());
-        }
-        int16_t FlameData; 
-        FlameData = FlameSensor.readAnalog();
-        sendShort(FlameData);
-      }
-      break;
-    case GASSENSOR:
-      {
-
-        /*
-        if(GasSensor.getPort() != port)
-        {
-          GasSensor.reset(6);
-          GasSensor.setpin(GasSensor.pin2(),GasSensor.pin1());
-        }
-        int16_t GasData; 
-        //int16_t CameraData;
-        //GasData = GasSensor.readAnalog();
-        GasData = CameraData;
-        sendShort(GasData);
-        Serial.print("Gassensor works ");
-       */
-      }
-      break;
+    
     case GYRO:
       {
         uint8_t axis = readBuffer(7);
@@ -2136,34 +2060,6 @@ void readSensor(uint8_t device)
     case TIMER:
       {
         sendFloat((float)currentTime);
-      }
-      break;
-    case TOUCH_SENSOR:
-      {
-        if(touchSensor.getPort() != port)
-        {
-          touchSensor.reset(port);
-        }
-        sendByte(touchSensor.touched());
-      }
-      break;
-    case BUTTON:
-      {
-
-        uint8_t key_num = readBuffer(7);
-        if(buttonSensor.getPort() != port)
-        {
-          buttonSensor.reset(port);
-        }
-
-        if(key_num == 0)
-        {
-          sendByte(keyPressed);
-        }
-        else
-        {
-          sendByte(keyPressed == readBuffer(7));
-        }
       }
       break;
     case ENCODER_BOARD:
