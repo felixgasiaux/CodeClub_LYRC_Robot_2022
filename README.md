@@ -38,7 +38,7 @@ git clone https://github.com/felixgasiaux/CodeClub_LYRC_Robot_2022.git
 Then you will need to include the libraries into your arduino IDE :
  > Under Sketch > Include Library > Add .ZIP Library 
 
- > Then select the Library you just downloaded with in the repository
+ > Then select the Library you just downloaded within the repository
 
 Next you need to make sure that you have selected the right Board & Port :
 
