@@ -46,6 +46,6 @@ Next you need to make sure that you have selected the right Board & Port :
 
  > Go to Tools > Port and select your Port
 
- > Connect the Sensors to the correct Ports on the MegaPie
+ > Connect the Sensors to the correct Ports on the MegaPi
  
 Now open the .ino File from our Firmware, upload the code and have fun!
