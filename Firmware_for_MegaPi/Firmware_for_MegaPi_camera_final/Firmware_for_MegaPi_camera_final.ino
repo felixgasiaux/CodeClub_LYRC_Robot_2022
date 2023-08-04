@@ -116,9 +116,9 @@ MeModule modules[12];
 int16_t len = 52;
 int16_t servo_pins[12]={0,0,0,0,0,0,0,0,0,0,0,0};
 //Just for MegaPi
-int16_t moveSpeed = 360;
-int16_t turnSpeed = 360;
-int16_t minSpeed = 90;
+int16_t moveSpeed = 120;
+int16_t turnSpeed = 120;
+int16_t minSpeed = 60;
 int16_t factor = 23;
 int16_t distance=0;
 int16_t randnum = 0;                                                                               
@@ -669,8 +669,8 @@ void BackwardAndTurnRight(void)
  */
 void TurnLeft(void)
 {
-  encoders[0].setMotorPwm(moveSpeed);
-  encoders[1].setMotorPwm(-moveSpeed/2);
+  encoders[0].setMotorPwm(moveSpeed/2);
+  encoders[1].setMotorPwm(-moveSpeed/4);
 }
 
 /**
@@ -689,8 +689,8 @@ void TurnLeft(void)
  */
 void TurnRight(void)
 {
-  encoders[0].setMotorPwm(moveSpeed/2);
-  encoders[1].setMotorPwm(-moveSpeed);
+  encoders[0].setMotorPwm(moveSpeed/4);
+  encoders[1].setMotorPwm(-moveSpeed/2);
 }
 
 /**
@@ -709,8 +709,8 @@ void TurnRight(void)
  */
 void TurnLeft1(void)
 {
-  encoders[0].setMotorPwm(-moveSpeed);
-  encoders[1].setMotorPwm(-moveSpeed);
+  encoders[0].setMotorPwm(-moveSpeed/2);
+  encoders[1].setMotorPwm(-moveSpeed/2);
 }
 
 /**
@@ -729,8 +729,8 @@ void TurnLeft1(void)
  */
 void TurnRight1(void)
 {
-  encoders[0].setMotorPwm(moveSpeed);
-  encoders[1].setMotorPwm(moveSpeed);
+  encoders[0].setMotorPwm(moveSpeed/2);
+  encoders[1].setMotorPwm(moveSpeed/2);
 }
 
 /**
